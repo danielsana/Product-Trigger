@@ -1,0 +1,20 @@
+modules:
+  trigger:
+    - key: product-trigger-hello-world
+      function: main
+      events:
+        - avi:jira:created:issue
+      filter:
+        ignoreSelf: false
+        expression: event.issue.fields.summary != null
+  function:
+    - key: main
+      handler: index.run
+app:
+  runtime:
+    name: nodejs20.x
+  id: ari:cloud:ecosystem::app/90b68204-a9b6-4853-af18-458ebe075551
+permissions:
+  scopes:
+    - read:jira-work
+    - write:jira-work
